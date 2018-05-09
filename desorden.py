@@ -38,8 +38,7 @@ lineas = [line.rstrip('\n') for line in open('ADN.DAT')]
 adnres = open("ADN.RES", "w")
 
 #SACA LA PRIMERA LINEA DEL ARCHIVO LEIDO
-lineas.pop(1) 
-
+lineas.pop(0) 
 
 #SORTED   = toma cada string de cada linea y la pasa a la funcion DESORDEN ya que al tomar un String lo divide como un array
 #MAP      = itera sobre la variable "lineas" con la funcion alias "desorden" que a su vez llama a la funcion "desorden"
