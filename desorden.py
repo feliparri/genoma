@@ -1,3 +1,6 @@
+#FUNCION LAMBDA PARA ITERAR SOBRE LA FUNCION DESORDE
+#la variable F es el nombre de la funcion que necesitamos usar, en este caso "desorden" 
+#la variable S es el valor del string que estamos desordenando
 
 def envuelve(f):
     return lambda s: (f(s), s)
@@ -23,22 +26,29 @@ def desorden(x):
             letras['T'] -= 1
             diferencia += letras['A'] + letras['C'] + letras['G']
         else:
+            #en caso que los caracteres no se cumpla "ACGT"
             raise Exception("seciencia desconocida")
      
     return diferencia    
 
 #LEE EL ARCHIVO ADN.DAT Y OBTIENE EL ARRAY 
 lineas = [line.rstrip('\n') for line in open('ADN.DAT')]
-#print(lineas.pop(1))
 
-#CREA ARCHIVO DE SALIDA ADN.RES
+#CREA ARCHIVO DE SALIDA ADN.RES PARA SER LLENADO EN LA ITERACION FOR MAS ABAJO
 adnres = open("ADN.RES", "w")
-#adnres.write(lineas[1])
 
-lineas.pop(1)
+#SACA LA PRIMERA LINEA DEL ARCHIVO LEIDO
+lineas.pop(1) 
+
+
+#SORTED   = toma cada string de cada linea y la pasa a la funcion DESORDEN ya que al tomar un String lo divide como un array
+#MAP      = itera sobre la variable "lineas" con la funcion alias "desorden" que a su vez llama a la funcion "desorden"
+#ENVUELVE = retorna el resultado de la variable enviada a la funcion "desorden" iterando por cada valor en la variable "lineas"
+
 #RECORRE EL ARRAY Y LO PASA POR LA FUNCION DESORDEN
 for score, str in sorted(map(envuelve(desorden), lineas)):
     #print(str, score)
     adnres.write(str+'\n')
 
+#CIERRA EL ARCHIVO
 adnres.close()  
